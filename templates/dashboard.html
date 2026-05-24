@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center mb-5">
+    UrbanFix Dashboard
+</h1>
+
+<div class="row">
+
+    <!-- Total Complaints -->
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 text-center mb-4">
+
+            <h4>Total Complaints</h4>
+
+            <h1 class="text-primary">
+                {{ total }}
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- Pending Complaints -->
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 text-center mb-4">
+
+            <h4>Pending</h4>
+
+            <h1 class="text-danger">
+                {{ pending }}
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- Resolved Complaints -->
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 text-center mb-4">
+
+            <h4>Resolved</h4>
+
+            <h1 class="text-success">
+                {{ resolved }}
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- Total Reports -->
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 text-center mb-4">
+
+            <h4>Total Reports</h4>
+
+            <h1 class="text-warning">
+                {{ reports }}
+            </h1>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Analytics Chart -->
+
+<div class="card shadow p-4 mt-4">
+
+    <h3 class="text-center mb-4">
+        Complaint Analytics
+    </h3>
+
+    <canvas id="complaintChart"></canvas>
+
+</div>
+
+<!-- Recent Activity Section -->
+
+<div class="card shadow p-4 mt-5">
+
+    <h3 class="mb-4">
+        System Insights
+    </h3>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="border rounded p-3 text-center">
+
+                <h5>Most Common Issue</h5>
+
+                <p class="fs-4 text-primary">
+                    Garbage Overflow
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="border rounded p-3 text-center">
+
+                <h5>Critical Area</h5>
+
+                <p class="fs-4 text-danger">
+                    Kukatpally
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="border rounded p-3 text-center">
+
+                <h5>System Status</h5>
+
+                <p class="fs-4 text-success">
+                    Active
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Chart JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('complaintChart');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: [
+
+            'Total Complaints',
+            'Pending',
+            'Resolved'
+
+        ],
+
+        datasets: [{
+
+            label: 'Complaint Statistics',
+
+            data: [
+
+                {{ total }},
+                {{ pending }},
+                {{ resolved }}
+
+            ],
+
+            borderWidth: 1
+
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+
+            }
+        }
+    }
+});
+
+</script>
+
+{% endblock %}

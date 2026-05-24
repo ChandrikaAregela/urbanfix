@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mb-5">
+    Reported Complaints
+</h1>
+
+<!-- Search and Filter -->
+<form method="GET" class="row mb-4">
+    <!-- Search Box -->
+    <div class="col-md-6">
+        <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Search by issue or area"
+        >
+    </div>
+
+    <!-- Status Filter -->
+    <div class="col-md-4">
+        <select
+            name="status"
+            class="form-select"
+        >
+            <option>All</option>
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+        </select>
+    </div>
+
+    <!-- Button -->
+    <div class="col-md-2">
+        <button
+            type="submit"
+            class="btn btn-primary w-100"
+        >
+            Search
+        </button>
+    </div>
+</form>
+
+
+<div class="row">
+    {% for complaint in complaints %}
+    <div class="col-md-4">
+        <div class="card shadow mb-4">
+            <!-- Complaint Image -->
+            <img
+                src="{{ url_for('static', filename='uploads/' ~ complaint[4]) }}"
+                class="card-img-top"
+                height="250"
+            >
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Issue Title -->
+                <h4 class="card-title">
+                    {{ complaint[1] }}
+                </h4>
+
+                <!-- Area -->
+                <p>
+                    <b>Area:</b>
+                    {{ complaint[2] }}
+                </p>
+
+                <!-- Description -->
+                <p>
+                    {{ complaint[3] }}
+                </p>
+
+                <!-- Reports Count -->
+
+                <p>
+                    <b>Reports:</b>
+                    {{ complaint[5] }}
+                </p>
+
+                <p>
+                <b>Reported On:</b>
+                 {{ complaint[7] }}
+                </p>
+
+                <!-- Status Badge -->
+
+                {% if complaint[6] == 'Pending' %}
+
+                    <span class="badge bg-danger">
+                        Pending
+                    </span>
+
+                {% elif complaint[6] == 'In Progress' %}
+
+                    <span class="badge bg-warning text-dark">
+                        In Progress
+                    </span>
+
+                {% elif complaint[6] == 'Resolved' %}
+
+                    <span class="badge bg-success">
+                        Resolved
+                    </span>
+
+                {% endif %}
+
+                <!-- Update Button -->
+
+                <div class="mt-3">
+
+                    <a
+                        href="/update_status/{{ complaint[0] }}"
+                        class="btn btn-dark w-100"
+                    >
+                        Update Status
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

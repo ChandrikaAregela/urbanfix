@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow p-4">
+            <h2 class="text-center mb-4"> Report Civic Issue </h2>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label"> Issue Type </label>
+
+                    <select
+                        name="issue"
+                        class="form-select"
+                    >
+                        <option>Garbage Overflow</option>
+                        <option>Pothole</option>
+                        <option>Water Leakage</option>
+                        <option>Broken Streetlight</option>
+                        <option>Drainage Blockage</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+
+                    <label class="form-label"> Area </label>
+                    <input
+                        type="text"
+                        name="area"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"> Description </label>
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"> Upload Image </label>
+                    <input
+                        type="file"
+                        name="image"
+                        class="form-control"
+                        required
+                    >
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100"
+                >
+                    Submit Complaint
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+body {
+
+    background-color: #f4f7fa;
+
+}
+
+.card {
+
+    border: none;
+
+    border-radius: 15px;
+
+}
+
+.card img {
+
+    object-fit: cover;
+
+}
+
+.navbar-brand {
+
+    font-size: 24px;
+
+}
